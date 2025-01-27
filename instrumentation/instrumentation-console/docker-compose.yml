@@ -1,0 +1,18 @@
+# x-default-logging: &logging
+#   driver: "json-file"
+#   options:
+#     max-size: "5m"
+#     max-file: "2"
+#     tag: "{{.Name}}"
+
+services:
+  otel-collector:
+    image: otel/opentelemetry-collector
+    volumes:
+      - ./collector-config.yaml:/etc/otelcol/config.yaml
+    ports:
+      - "4317:4317"
+      - "4318:4318"
+    restart: no
+    # logging: *logging
+

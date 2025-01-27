@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - otel-network
+  
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:latest
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ./otel-collector-config.yaml:/etc/otel-collector-config.yaml
+    ports:
+      - "4317:4317"   # gRPC endpoint for OTLP
+      - "4318:4318"   # HTTP endpoint for OTLP
+      - "8888:8888"   # Prometheus metrics endpoint for the collector itself (optional)
+    depends_on:
+      - prometheus
+    networks:
+      - otel-network
+
+networks:
+  otel-network:
+    driver: bridge

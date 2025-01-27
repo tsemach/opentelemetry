@@ -1,0 +1,43 @@
+version: '3.8'
+
+# x-default-logging: &logging
+#   driver: "json-file"
+#   options:
+#     max-size: "5m"
+#     max-file: "2"
+#     tag: "{{.Name}}"
+
+# docker run \
+#   -p 127.0.0.1:4317:4317 \
+#   -p 127.0.0.1:4318:4318 \
+#   -p 127.0.0.1:55679:55679 \
+#   otel/opentelemetry-collector-contrib:0.117.0 \
+
+services:
+  otel-collector:
+    # image: otel/opentelemetry-collector
+    image: otel/opentelemetry-collector-contrib:latest
+    volumes:
+      - ./collector-config.yaml:/etc/otelcol/config.yaml
+    ports:
+    - 1888:1888 # pprof extension
+    - 8888:8888 # Prometheus metrics exposed by the Collector
+    - 8889:8889 # Prometheus exporter metrics
+    - 13133:13133 # health_check extension
+    - 4317:4317 # OTLP gRPC receiver
+    - 4318:4318 # OTLP http receiver
+    - 55679:55679 # zpages extension
+    restart: "no"
+    # logging: *logging
+
+  # jaeger:
+  #   image: jaegertracing/all-in-one:latest
+  #   container_name: jaeger
+  #   environment:
+  #     - COLLECTOR_ZIPKIN_HOST_PORT=:9411
+  #   ports:
+  #     - "16686:16686" # Jaeger UI
+  #     - "4317:4317"   # OpenTelemetry gRPC
+  #     - "4318:4318"   # OpenTelemetry HTTP
+  #     - "9411:9411"   # Zipkin
+  #   restart: unless-stopped

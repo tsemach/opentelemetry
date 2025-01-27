@@ -1,0 +1,22 @@
+receivers:
+  prometheus:
+    config:
+      scrape_configs:
+        - job_name: 'prometheus'
+          scrape_interval: 15s
+          static_configs:
+            - targets: ['prometheus:9090'] # target prometheus instance in this docker compose file
+
+processors:
+  batch:
+
+exporters:
+  logging:
+    verbosity: detailed # for debug purpose
+
+service:
+  pipelines:
+    metrics:
+      receivers: [prometheus]
+      processors: [batch]
+      exporters: [logging]
