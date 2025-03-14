@@ -11,7 +11,6 @@ export class AppController {
 
   @Get()
   handleRequest() {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     this.requestCounter.add(1, { route: '/api' });
     return { message: 'Request received!' };
   }
