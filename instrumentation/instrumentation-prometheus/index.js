@@ -10,8 +10,12 @@ const exporter = new PrometheusExporter(
 );
 
 // Create a Meter Provider
-const meterProvider = new MeterProvider();
-meterProvider.addMetricReader(exporter);
+const meterProvider = new MeterProvider({
+  readers: [exporter],
+});
+
+// const meterProvider = new MeterProvider();
+// meterProvider.addMetricReader(exporter);
 
 // Create a meter
 const meter = meterProvider.getMeter('example-meter');
