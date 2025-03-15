@@ -17,18 +17,18 @@ const meterProvider = new MeterProvider({
       useValue: meterProvider,
     },
     {
-      provide: 'OTEL_METRIC_requests_total',
+      provide: 'OTEL_METRIC_opentelemetry_requests_total',
       useFactory: (meterProvider: MeterProvider) => {
         const meter = meterProvider.getMeter('nestjs-meter');
 
-        return meter.createCounter('requests_total', {
-          description: 'Total number of requests',
+        return meter.createCounter('opentelemetry_requests_total', {
+          description: 'Opentelemetry Total number of requests',
         });
       },
       inject: ['OTEL_METER_PROVIDER'],
     },
   ],
-  exports: ['OTEL_METRIC_requests_total'],
+  exports: ['OTEL_METER_PROVIDER', 'OTEL_METRIC_opentelemetry_requests_total'],
 })
 export class OpenTelemetryModule implements OnModuleInit {
   constructor() {}
