@@ -11,7 +11,7 @@ import { METRICS } from 'src/common/metrics-consts';
     {
       provide: `OTEL_METRIC_${METRICS.COUNTER_REQUESTS.name}`,
       useFactory: (meterProvider: MeterProvider) => {
-        const meter = meterProvider.getMeter('nestjs-meter');
+        const meter = meterProvider.getMeter('nestjs-counter-meter');
 
         return meter.createCounter(METRICS.COUNTER_REQUESTS.name, {
           description: 'Count total number of requests',
