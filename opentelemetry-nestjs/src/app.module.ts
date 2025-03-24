@@ -6,6 +6,7 @@ import { OpenTelemetryModule } from './opentelemetry/opentelemetry.module';
 import { CounterModule } from './counter/counter.module';
 import { GaugeModule } from './gauge/gauge.module';
 import { Config } from './config';
+import { PrometheusModule } from './prometheus/prometheus.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { Config } from './config';
         },
       },
     ]),
+    PrometheusModule,
     OpenTelemetryModule,
     CounterModule,
     GaugeModule,

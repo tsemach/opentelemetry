@@ -85,7 +85,7 @@ services:
     restart: always
     environment:
       - KAFKA_CLUSTERS_0_NAME=local
-      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka-1:19092,kafka-2:29092,kafka-3:39092
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=${MY_IP}:19092,${MY_IP}:29092,${MY_IP}:39092
       - KAFKA_CLUSTERS_0_ZOOKEEPER=${MY_IP}:22181,${MY_IP}:32181,${MY_IP}:42181
     depends_on:
       - kafka-1

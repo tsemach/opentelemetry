@@ -3,11 +3,11 @@ import { GaugeService } from './gauge.service';
 
 @Controller('gauge')
 export class GaugeController {
-  constructor(private readonly counterService: GaugeService) {}
+  constructor(private readonly gaugeService: GaugeService) {}
 
   @Post('update')
   updateGauge() {
-    this.counterService.handleRequest();
+    this.gaugeService.handleRequest();
 
     return {
       message: `Gauge updated`,
