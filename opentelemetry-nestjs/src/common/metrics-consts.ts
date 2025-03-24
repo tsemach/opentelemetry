@@ -11,4 +11,8 @@ export const METRICS = {
     name: 'gauge_requests_total',
     help: 'Gauge counter for the number of requests',
   },
+  HISTOGRAM_REQUESTS: {
+    name: 'histogram_requests_latency',
+    help: 'Histogram for the duration of requests',
+  },
 };

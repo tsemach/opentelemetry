@@ -7,6 +7,7 @@ import { CounterModule } from './counter/counter.module';
 import { GaugeModule } from './gauge/gauge.module';
 import { Config } from './config';
 import { PrometheusModule } from './prometheus/prometheus.module';
+import { HistogramModule } from './histogram/histogram.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { PrometheusModule } from './prometheus/prometheus.module';
     OpenTelemetryModule,
     CounterModule,
     GaugeModule,
+    HistogramModule,
   ],
   controllers: [AppController],
   providers: [AppService],
